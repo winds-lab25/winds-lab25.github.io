@@ -757,6 +757,17 @@
   $('nav-links').addEventListener('click', function (e) { if (e.target.closest('a')) setMenu(false); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { setMenu(false); closeLightbox(); } });
 
+  // replay the footer logo's animation the first time the footer scrolls into view
+  var footerLogo = $('footer-logo');
+  if (footerLogo && 'IntersectionObserver' in window && !reduceMotion) {
+    var replay = new IntersectionObserver(function (entries) {
+      if (!entries[0].isIntersecting) return;
+      replay.disconnect();
+      footerLogo.src = footerLogo.getAttribute('src').split('?')[0] + '?play=' + Date.now();
+    }, { threshold: 0.6 });
+    replay.observe(footerLogo);
+  }
+
   if ('IntersectionObserver' in window) {
     var reveal = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {

@@ -104,6 +104,15 @@ p { margin: 0 0 1em; text-wrap: pretty; }
 .nav-inner { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
 .logo { display: inline-flex; align-items: center; gap: 12px; color: #fff; }
 .logo:hover { text-decoration: none; }
+/* navbar logo: dark-background colours over the hero, the original colours once the bar turns white */
+.logo-img { display: block; height: 46px; width: auto; }
+.logo-img.on-light { display: none; }
+.site-nav.scrolled .logo-img.on-dark, .site-nav.menu-open .logo-img.on-dark { display: none; }
+.site-nav.scrolled .logo-img.on-light, .site-nav.menu-open .logo-img.on-light { display: block; }
+@media (max-width: 640px) { .logo-img { height: 40px; } }
+.footer-logo { display: inline-block; }
+.footer-logo img { display: block; width: 200px; height: auto; }
+.footer-about .footer-tagline { max-width: none; margin: 14px 0 0; font-size: .72rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: rgba(255, 255, 255, .55); }
 .logo-mark {
   flex: none; width: 40px; height: 40px; border-radius: 11px; display: grid; place-items: center;
   background: linear-gradient(135deg, #14b8a6, #6366f1); color: #fff;
@@ -687,8 +696,9 @@ section[id] { scroll-margin-top: var(--nav-h); }
 .admin { background: #f4f6fa; }
 .admin-bar { background: var(--navy-900); color: #fff; }
 .admin-bar .nav-inner { height: 64px; }
-.admin-bar .logo-mark { width: 34px; height: 34px; border-radius: 9px; }
-.admin-bar .logo-mark svg { width: 22px; height: 22px; }
+.admin-logo { gap: 14px; }
+.admin-logo img { display: block; height: 38px; width: auto; }
+.admin-tag { padding: 3px 9px; border-radius: 6px; border: 1px solid rgba(255, 255, 255, .22); font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(255, 255, 255, .8); }
 .admin-nav { display: flex; align-items: center; gap: 6px; }
 .admin-nav a { color: rgba(255, 255, 255, .8); font-size: .92rem; font-weight: 500; padding: 7px 12px; border-radius: 8px; }
 .admin-nav a:hover { color: #fff; background: rgba(255, 255, 255, .09); text-decoration: none; }
@@ -701,7 +711,7 @@ section[id] { scroll-margin-top: var(--nav-h); }
 
 .panel { margin-bottom: 24px; padding: 26px; background: #fff; border: 1px solid var(--line); border-radius: 16px; box-shadow: var(--shadow-sm); scroll-margin-top: 24px; }
 .login { max-width: 420px; margin: 56px auto; padding: 34px; text-align: left; }
-.login .logo-mark { margin-bottom: 18px; }
+.login-logo { display: block; height: 48px; width: auto; margin-bottom: 22px; }
 .login h1 { font-size: 1.45rem; font-weight: 800; margin-bottom: 4px; }
 .login > p { color: var(--muted); margin-bottom: 22px; }
 .login .btn { width: 100%; padding: 12px; }
