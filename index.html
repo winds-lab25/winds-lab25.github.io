@@ -1,142 +1,292 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Home &middot; WiNDS Lab</title><meta name="description" content="WiNDS Lab at IIT (ISM) Dhanbad, led by Dr. Alakesh Kalita — research on IoT, wireless networks, and distributed systems."><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230B1322'/%3E%3Ccircle cx='16' cy='16' r='3.4' fill='%2314CFBE'/%3E%3Ccircle cx='7' cy='8' r='2' fill='%23ffffff'/%3E%3Ccircle cx='25' cy='9' r='2' fill='%23ffffff'/%3E%3Ccircle cx='8' cy='25' r='2' fill='%23ffffff'/%3E%3Ccircle cx='25' cy='24' r='2' fill='%236A57E8'/%3E%3Cpath d='M16 16 7 8M16 16 25 9M16 16 8 25M16 16 25 24' stroke='%23ffffff' stroke-width='1.2' opacity='.6'/%3E%3C/svg%3E"><meta name="theme-color" content="#0B1322"><meta property="og:title" content="Home · WiNDS Lab"><meta property="og:description" content="WiNDS Lab at IIT (ISM) Dhanbad, led by Dr. Alakesh Kalita — research on IoT, wireless networks, and distributed systems."><meta property="og:type" content="website"><meta property="og:image" content="assets/img/og-cover.png"><meta name="twitter:card" content="summary_large_image"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;450;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="assets/site.css"></head><body><a class="skip" href="#main">Skip to content</a><div class="progress" id="progress"></div><nav class="nav" id="nav"><a href="index.html" class="brand"><span class="brandmark"><img class="logo-img" src="assets/img/logo.png" alt="WiNDS Lab logo" onload="this.classList.add('loaded')"><svg class="glyph" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="4" fill="#0FA99B"/><circle cx="5" cy="7" r="2.4" fill="currentColor"/><circle cx="27" cy="8" r="2.4" fill="currentColor"/><circle cx="6" cy="25" r="2.4" fill="currentColor"/><circle cx="26" cy="25" r="2.4" fill="#6A57E8"/><path d="M16 16 5 7M16 16 27 8M16 16 6 25M16 16 26 25" stroke="currentColor" stroke-width="1.3" opacity=".55"/></svg></span> WiNDS Lab</a><div class="nav-links" id="navLinks"><a href="index.html" class="lnk active">Home</a><a href="research.html" class="lnk">Research</a><a href="people.html" class="lnk">People</a><a href="publications.html" class="lnk">Publications</a><a href="grants.html" class="lnk">Grants</a><a href="news.html" class="lnk">News</a><a href="join.html" class="btn btn-primary nav-cta">Join the lab</a></div><button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button></nav><main id="main">
-  <!-- ============================================================
-       HERO  ·  edit the headline / subtitle here
-       ============================================================ -->
-  <header class="hero mesh-host">
-    <canvas class="mesh" aria-hidden="true"></canvas>
-    <div class="dotgrid"></div>
-    <div class="veil"></div>
-    <div class="container hero-inner">
-      <span class="eyebrow">WiNDS Lab &middot; IIT (ISM) Dhanbad</span>
-      <h1>Wireless Networks <span class="gradient-text">&amp;</span> Distributed Systems Lab</h1>
-      <p class="hero-sub">We design, implement, and stress-test IoT and distributed systems &mdash; making resource-constrained networks measurably faster, more scalable, and more resilient, and rethinking them with AI/ML.</p>
-      <div class="hero-cta">
-        <a href="research.html" class="btn btn-primary">Explore our research <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h9M8 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-        <a href="join.html" class="btn btn-outline">Join the lab</a>
-      </div>
-    </div>
-  </header>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WiNDS Lab · Wireless Networks &amp; Distributed Systems · IIT (ISM) Dhanbad</title>
+  <meta name="description" content="WiNDS Lab (Wireless Networks & Distributed Systems) at IIT (ISM) Dhanbad, led by Dr. Alakesh Kalita. Research on IoT, wireless networks, edge computing, and AI/ML for networked systems.">
+  <meta name="theme-color" content="#0a1628">
+  <meta property="og:title" content="WiNDS Lab · IIT (ISM) Dhanbad">
+  <meta property="og:description" content="Wireless Networks & Distributed Systems Lab at IIT (ISM) Dhanbad.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2314b8a6'/%3E%3Cstop offset='1' stop-color='%236366f1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='url(%23g)'/%3E%3Cpath d='M5 11L10.5 23.5L16 15L21.5 23.5L27 11' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' opacity='.8'/%3E%3Cpath d='M12.8 11.2A4.6 4.6 0 0 1 19.2 11.2' fill='none' stroke='%23fff' stroke-width='1.8' stroke-linecap='round'/%3E%3Ccircle cx='5' cy='11' r='2.4' fill='%23fff'/%3E%3Ccircle cx='10.5' cy='23.5' r='2.4' fill='%23fff'/%3E%3Ccircle cx='16' cy='15' r='3.1' fill='%23fff'/%3E%3Ccircle cx='21.5' cy='23.5' r='2.4' fill='%23fff'/%3E%3Ccircle cx='27' cy='11' r='2.4' fill='%23fff'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
 
-  <!-- ============================================================
-       STAT BAND  ·  edit the four numbers
-       Each number lives in  data-count="N"  (data-dec = decimals shown)
-       ============================================================ -->
-  <section class="statband">
-    <div class="container">
-      <div class="grid">
-        <div class="stat reveal"><div class="num"><span data-count="4" data-dec="0">0</span></div><div class="lbl">Active grants</div></div>
-        <div class="stat reveal"><div class="num">&#8377;<span data-count="1.14" data-dec="2">0</span><span class="u">Cr</span></div><div class="lbl">Funding secured</div></div>
-        <div class="stat reveal"><div class="num"><span data-count="4" data-dec="0">0</span></div><div class="lbl">Research scholars</div></div>
-        <div class="stat reveal"><div class="num"><span data-count="2" data-dec="0">0</span></div><div class="lbl">Patents (1 granted)</div></div>
-      </div>
-    </div>
-  </section>
+<!-- ================= NAVIGATION ================= -->
+<header class="site-nav" id="nav">
+  <div class="container nav-inner">
+    <a class="logo" href="#top" aria-label="WiNDS Lab home">
+      <span class="logo-mark">
+        <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M5 11L10.5 23.5L16 15L21.5 23.5L27 11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity=".7"/><path d="M12.8 11.2A4.6 4.6 0 0 1 19.2 11.2M10.3 8.6A8 8 0 0 1 21.7 8.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="5" cy="11" r="2.3" fill="currentColor"/><circle cx="10.5" cy="23.5" r="2.3" fill="currentColor"/><circle cx="16" cy="15" r="3" fill="currentColor"/><circle cx="21.5" cy="23.5" r="2.3" fill="currentColor"/><circle cx="27" cy="11" r="2.3" fill="currentColor"/></svg>
+      </span>
+      <span class="logo-text"><strong>WiNDS Lab</strong><small>IIT (ISM) Dhanbad</small></span>
+    </a>
+    <nav class="nav-links" id="nav-links" aria-label="Main">
+      <a href="#research">Research</a>
+      <a href="#devices">Devices</a>
+      <a href="#news">News</a>
+      <a href="#people">People</a>
+      <a href="#publications">Publications</a>
+      <a href="#grants">Grants</a>
+      <a href="#join" class="btn btn-primary btn-nav">Join the lab</a>
+    </nav>
+    <button class="menu-btn" id="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links"><span></span><span></span><span></span></button>
+  </div>
+</header>
 
-  <!-- ============================================================
-       ABOUT  ·  edit the two paragraphs and the tag list
-       ============================================================ -->
-  <section class="section">
+<main id="main">
+
+  <!-- ================= HERO (edit the text directly) ================= -->
+  <section class="hero" id="top">
     <div class="container">
-      <div class="split reveal">
-        <div>
-          <span class="eyebrow">About the lab</span>
-          <p class="about-lead" style="margin-top:20px">WiNDS Lab explores the Internet of Things and distributed systems by building real solutions to real problems &mdash; then measuring whether they actually hold up.</p>
-          <p class="about-body">Based in the Department of Mathematics and Computing at IIT (ISM) Dhanbad, the lab improves the performance, scalability, and efficiency of IoT networks and distributed systems. We work close to the metal &mdash; protocols, simulators, and testbeds &mdash; and pair that with cutting-edge AI/ML to push what resource-constrained networks can do.</p>
-          <a href="people.html" class="link-arrow">Meet the team <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h9M8 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <div class="hero-copy">
+        <span class="hero-badge"><span class="dot"></span>WiNDS Lab · IIT (ISM) Dhanbad</span>
+        <h1>Wireless Networks &amp; <span class="accent">Distributed Systems</span></h1>
+        <p class="hero-lead">We design, implement, and stress-test IoT and distributed systems, making resource-constrained networks measurably faster, more scalable, and more resilient, and rethinking them with AI/ML.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary btn-lg" href="#research">Explore our research
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="btn btn-glass btn-lg" href="#join">Join the lab</a>
         </div>
-        <div class="focus-card">
-          <h4>What we work on</h4>
-          <div class="tag-cloud">
-            <span class="tag hot">Internet of Things</span><span class="tag">Wireless Networks</span>
-            <span class="tag">AI/ML in Networks</span><span class="tag">Edge Computing</span>
-            <span class="tag hot">Protocol Performance</span><span class="tag">Congestion Control</span>
-            <span class="tag">Deep Reinforcement Learning in Computer Systems </span><span class="tag">Testbeds</span>
-          </div>
-        </div>
       </div>
     </div>
+    <div class="hero-scene" id="hero-scene" aria-hidden="true"></div>
   </section>
 
-  <!-- ============================================================
-       RESEARCH PREVIEW  ·  shows 3 cards; full list is on research.html
-       ============================================================ -->
-  <section class="section alt">
-    <div class="container">
-      <div class="section-head reveal">
-        <span class="eyebrow">Research directions</span>
-        <h2>What we&rsquo;re building</h2>
-        <p>Three of the six problems we keep returning to &mdash; from the physical link up to the learning layer.</p>
-      </div>
-      <div class="cards">
-        <article class="rcard reveal"><svg class="r-glyph" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="4" fill="currentColor"/><circle cx="7" cy="10" r="2.6" fill="currentColor"/><circle cx="33" cy="12" r="2.6" fill="currentColor"/><circle cx="10" cy="32" r="2.6" fill="currentColor"/><circle cx="31" cy="31" r="2.6" fill="currentColor"/><path d="M20 20 7 10M20 20 33 12M20 20 10 32M20 20 31 31" stroke="currentColor" stroke-width="1.4" opacity=".5"/></svg><div class="idx">01</div><h3>Internet of Things</h3><p>Making dense, low-power IoT deployments reliable and scalable — reliability, scheduling, and lifetime under real constraints.</p></article><article class="rcard reveal"><svg class="r-glyph" viewBox="0 0 40 40" fill="none"><path d="M20 30a10 10 0 0 1 0-20" stroke="currentColor" stroke-width="1.6"/><path d="M20 34a14 14 0 0 1 0-28" stroke="currentColor" stroke-width="1.6" opacity=".55"/><circle cx="20" cy="20" r="3" fill="currentColor"/></svg><div class="idx">02</div><h3>Wireless Networks</h3><p>Squeezing more range, throughput, and mission-critical reliability out of the wireless edge, including UAV networks.</p></article><article class="rcard reveal"><svg class="r-glyph" viewBox="0 0 40 40" fill="none"><rect x="7" y="24" width="4" height="9" fill="currentColor"/><rect x="15" y="18" width="4" height="15" fill="currentColor"/><rect x="23" y="12" width="4" height="21" fill="currentColor"/><rect x="31" y="7" width="4" height="26" fill="currentColor" opacity=".55"/></svg><div class="idx">03</div><h3>Protocol Performance</h3><p>Rigorous, reproducible evaluation of IoT protocols — building simulators and testbeds to see what really happens.</p></article>
-      </div>
-      <div style="text-align:center;margin-top:36px" class="reveal">
-        <a href="research.html" class="btn btn-dark">See all six directions <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h9M8 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       PI  ·  Dr. Kalita's card (edit full bio on people.html too)
-       ============================================================ -->
-  <section class="section">
-    <div class="container">
-      <div class="section-head reveal"><span class="eyebrow">The people</span><h2>Led by</h2></div>
-        <!-- PRINCIPAL INVESTIGATOR card -->
-  <div class="pi-card reveal">
-    <div class="avatar" style="background:linear-gradient(140deg,#0FA99B,#6A57E8)"><span class="initials">AK</span><img class="photo" src="assets/img/people/alakesh.jpg" alt="Dr. Alakesh Kalita" onload="this.classList.add('loaded')"></div>
-    <div class="pi-info">
-      <h3>Dr. Alakesh Kalita</h3>
-      <div class="pi-role">Principal Investigator &middot; Assistant Professor</div>
-      <div class="pi-affil">Department of Mathematics and Computing, IIT (ISM) Dhanbad</div>
-      <p class="pi-bio">Ph.D. from IIT Guwahati, with prior roles as a Lecturer at SUTD and a Postdoctoral Research Fellow at NUS, Singapore. IEEE Senior Member. Recipient of the INAE Innovative Student Projects Award (equivalent to Best Thesis) for his doctoral work on the IoT.</p>
-      <div class="pi-cred"><span class="chip">IEEE Senior Member</span><span class="chip">INAE Best Thesis &middot; 2022</span><span class="chip">Ph.D., IIT Guwahati</span><span class="chip">Ex-NUS &middot; Ex-SUTD</span></div>
-      <div class="pi-links"><a href="https://alakesh-kalita.github.io/" target="_blank" rel="noopener" class="btn btn-dark">Personal website &#8599;</a><a href="https://www.iitism.ac.in/mathematics-and-computing" target="_blank" rel="noopener" class="btn btn-outline">Department &#8599;</a></div>
+  <!-- Numbers are worked out automatically from the content (grants, publications, people). -->
+  <div class="container">
+    <div class="stats" id="stats" aria-label="Lab at a glance">
+      <div class="stat"><span class="stat-icon" data-glyph="funds"></span><div><div class="stat-num">–</div><div class="stat-label">Research funding</div></div></div>
+      <div class="stat"><span class="stat-icon" data-glyph="papers"></span><div><div class="stat-num">–</div><div class="stat-label">Publications</div></div></div>
+      <div class="stat"><span class="stat-icon" data-glyph="patents"></span><div><div class="stat-num">–</div><div class="stat-label">Patents</div></div></div>
+      <div class="stat"><span class="stat-icon" data-glyph="people"></span><div><div class="stat-num">–</div><div class="stat-label">Student researchers</div></div></div>
     </div>
   </div>
 
-      <div style="text-align:center;margin-top:36px" class="reveal">
-        <a href="people.html" class="link-arrow" style="justify-content:center">See students &amp; open positions <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h9M8 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       LATEST NEWS (homepage shows newest 4; full log on news.html)
-       TO ADD AN ITEM: copy one "news-item" block below,
-       put it at the TOP, then edit:
-         - the date  (e.g. Jul 2026)
-         - the tag class: nt-pub (paper) / nt-grant (grant) / nt-award (award) / nt-misc (other)
-         - the tag label and the sentence
-       ============================================================ -->
-  <section class="section alt">
+  <!-- ================= ABOUT (edit the text directly) ================= -->
+  <section class="section" id="about">
     <div class="container">
-      <div class="section-head reveal"><span class="eyebrow">Lab feed</span><h2>Latest news</h2></div>
-      <div class="news-wrap">
-        <div class="news-item reveal"><div class="news-date">Oct 2026</div><div class="news-text"><span class="news-tag nt-pub">Paper</span> Three Conference papers accepted in <b>ICDCN 2027</b>.</div></div>
-        <div class="news-item reveal"><div class="news-date">Jun 2026</div><div class="news-text"><span class="news-tag nt-pub">Paper</span>Conference paper accepted in <b>IEEE TENCON 2026</b>.</div></div>
-        <div class="news-item reveal"><div class="news-date">Jun 2026</div><div class="news-text"><span class="news-tag nt-award">Milestone</span>The lab&rsquo;s <b>first patent is granted</b>.</div></div>
-        <div class="news-item reveal"><div class="news-date">Mar 2026</div><div class="news-text"><span class="news-tag nt-award">Award</span>Rakesh Pradhan receives the <b>IndiaAI PhD Fellowship</b> from MeitY.</div></div>
-        <div class="news-item reveal"><div class="news-date">Oct 2025</div><div class="news-text"><span class="news-tag nt-grant">Grant</span>Received a research grant from <b>TiHAN, IIT Hyderabad</b>.</div></div>
-      </div>
-      <div style="margin-top:36px" class="reveal"><a href="news.html" class="btn btn-dark">All news <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h9M8 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       JOIN CALLOUT
-       ============================================================ -->
-  <section class="section">
-    <div class="container">
-      <div class="join-panel reveal"><div class="inner">
-        <span class="eyebrow" style="color:#8ff0e7">Opportunities</span>
-        <h2>We&rsquo;re looking for people who like to build and measure.</h2>
-        <p>The lab welcomes motivated Master&rsquo;s and PhD students, preferably with a Computer Science background. If IoT, wireless networks, or AI/ML for systems is your thing, we&rsquo;d love to hear from you.</p>
-        <div class="hero-cta">
-          <a href="join.html" class="btn btn-primary">How to join <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h9M8 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-          <a href="https://alakesh-kalita.github.io/" target="_blank" rel="noopener" class="btn btn-outline" style="background:rgba(255,255,255,.06);color:#fff;border-color:rgba(255,255,255,.25)">Get in touch &#8599;</a>
+      <div class="mission reveal">
+        <div>
+          <span class="eyebrow">About the lab</span>
+          <h2 class="statement">We build real solutions to real networking problems, <span>then measure whether they actually hold up.</span></h2>
         </div>
-      </div></div>
+        <div class="mission-text">
+          <p>Based in the Department of Mathematics and Computing at IIT (ISM) Dhanbad, WiNDS Lab improves the performance, scalability, and efficiency of IoT networks and distributed systems.</p>
+          <p>We work close to the metal, with protocols, simulators, and testbeds, and pair that with AI/ML to push what resource-constrained networks can do.</p>
+        </div>
+      </div>
+
+      <ol class="process reveal">
+        <li>
+          <span class="process-icon" data-glyph="simulate"></span>
+          <span class="process-step">Step 01</span>
+          <h3>Simulate</h3>
+          <p>Reproducible simulators such as 6TiSCH-Sim explore protocol behaviour at scale, before touching hardware.</p>
+        </li>
+        <li>
+          <span class="process-icon" data-glyph="hardware"></span>
+          <span class="process-step">Step 02</span>
+          <h3>Test on real hardware</h3>
+          <p>Our IoT testbed grounds every result in real radios, real interference, and real energy budgets.</p>
+        </li>
+        <li>
+          <span class="process-icon" data-glyph="learn"></span>
+          <span class="process-step">Step 03</span>
+          <h3>Learn and adapt</h3>
+          <p>Deep RL and ML turn measurements into controllers that adapt scheduling, routing, and control.</p>
+        </li>
+      </ol>
     </div>
   </section>
-</main><footer><div class="container"><div class="foot-grid"><div><div class="foot-brand"><span class="brandmark"><img class="logo-img" src="assets/img/logo.png" alt="WiNDS Lab logo" onload="this.classList.add('loaded')"><svg class="glyph" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="4" fill="#0FA99B"/><circle cx="5" cy="7" r="2.4" fill="currentColor"/><circle cx="27" cy="8" r="2.4" fill="currentColor"/><circle cx="6" cy="25" r="2.4" fill="currentColor"/><circle cx="26" cy="25" r="2.4" fill="#6A57E8"/><path d="M16 16 5 7M16 16 27 8M16 16 6 25M16 16 26 25" stroke="currentColor" stroke-width="1.3" opacity=".55"/></svg></span> WiNDS Lab</div><p style="max-width:40ch;font-size:14.5px">Wireless Networks &amp; Distributed Systems — building and stress-testing the IoT at IIT (ISM) Dhanbad.</p></div><div><h5>Explore</h5><a class="f" href="research.html">Research</a><a class="f" href="people.html">People</a><a class="f" href="publications.html">Publications</a><a class="f" href="grants.html">Grants</a><a class="f" href="news.html">News</a><a class="f" href="join.html">Join the lab</a></div><div><h5>Elsewhere</h5><a class="f" href="https://alakesh-kalita.github.io/" target="_blank" rel="noopener">Personal website &#8599;</a><a class="f" href="https://www.iitism.ac.in/mathematics-and-computing" target="_blank" rel="noopener">Dept. of Maths &amp; Computing &#8599;</a><a class="f" href="https://www.iitism.ac.in/" target="_blank" rel="noopener">IIT (ISM) Dhanbad &#8599;</a><a class="f" href="https://admissions.iitism.ac.in/phd/index.php/admission" target="_blank" rel="noopener">PhD admissions &#8599;</a></div></div><div class="foot-bottom"><span>&copy; <span id="yr"></span> WiNDS Lab &middot; Dr. Alakesh Kalita</span><span class="mono">IIT (ISM) DHANBAD</span></div></div></footer><button class="totop" id="totop" aria-label="Back to top"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 14V4M4 9l5-5 5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button><script src="assets/site.js"></script></body></html>
+
+  <!-- ================= RESEARCH (from the Google Sheet) ================= -->
+  <section class="section section-alt" id="research">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Research</span>
+        <h2 class="section-title">What we work on</h2>
+        <p class="section-desc">From the physical link up to the learning layer: six directions the lab keeps returning to.</p>
+      </div>
+      <div class="feature-grid" id="research-list"><p class="muted">Loading…</p></div>
+    </div>
+  </section>
+
+  <!-- ================= DEVICES (from the Google Sheet; hidden until a device is added) ================= -->
+  <section class="section section-dark" id="devices">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Infrastructure</span>
+        <h2 class="section-title">Testbed &amp; devices</h2>
+        <p class="section-desc">The hardware behind our experiments: IoT nodes, gateways, robots, and drones that let us test ideas on real radios.</p>
+      </div>
+      <div class="device-grid" id="devices-list"></div>
+    </div>
+  </section>
+
+  <!-- ================= NEWS (from the Google Sheet) ================= -->
+  <section class="section" id="news">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">News</span>
+        <h2 class="section-title">Latest from the lab</h2>
+        <p class="section-desc">Papers, patents, grants, and awards: the running record of what the lab has been up to.</p>
+      </div>
+      <div class="news-layout reveal">
+        <article class="news-feature" id="news-feature" hidden></article>
+        <div>
+          <ol class="news-list" id="news-list"><li class="muted">Loading…</li></ol>
+          <button class="btn btn-outline news-more" id="news-more" type="button" hidden>Show all news</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PEOPLE ================= -->
+  <section class="section section-alt" id="people">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">People</span>
+        <h2 class="section-title">Meet the team</h2>
+        <p class="section-desc">A small, hands-on group of researchers working across IoT, wireless networks, and AI for systems.</p>
+      </div>
+
+      <!-- Principal investigator (edit the text directly). Photo: assets/img/people/alakesh.jpg -->
+      <article class="pi-card reveal">
+        <div class="pi-photo"><span>AK</span><img src="assets/img/people/alakesh.jpg" alt="Dr. Alakesh Kalita" onerror="this.remove()"></div>
+        <div>
+          <span class="eyebrow">Principal Investigator</span>
+          <h3>Dr. Alakesh Kalita</h3>
+          <p class="pi-position">Assistant Professor</p>
+          <p class="pi-affil">Department of Mathematics and Computing, IIT (ISM) Dhanbad</p>
+          <p class="pi-bio">Ph.D. from IIT Guwahati, with prior roles as a Lecturer at SUTD and a Postdoctoral Research Fellow at NUS, Singapore. IEEE Senior Member. Recipient of the INAE Innovative Student Projects Award (equivalent to Best Thesis) for his doctoral work on the IoT.</p>
+          <div class="cred"><span>IEEE Senior Member</span><span>INAE Best Thesis · 2022</span><span>Ph.D., IIT Guwahati</span><span>Ex-NUS · Ex-SUTD</span></div>
+          <div class="pi-links">
+            <a class="btn btn-primary" href="https://alakesh-kalita.github.io/" target="_blank" rel="noopener">Personal website
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+            <a class="btn btn-outline" href="https://www.iitism.ac.in/mathematics-and-computing" target="_blank" rel="noopener">Department
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Students (from the Google Sheet) -->
+      <div id="people-list"></div>
+    </div>
+  </section>
+
+  <!-- ================= PUBLICATIONS (from the Google Sheet) ================= -->
+  <section class="section" id="publications">
+    <div class="container">
+      <div class="section-head with-action reveal">
+        <div>
+          <span class="eyebrow">Publications</span>
+          <h2 class="section-title">Recent publications</h2>
+          <p class="section-desc">A snapshot of recent work. The complete, always-current list is on Dr. Kalita’s personal website.</p>
+        </div>
+        <a class="btn btn-outline" href="https://alakesh-kalita.github.io/" target="_blank" rel="noopener">Full publication list
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+      </div>
+      <div class="pub-filters" id="pub-filters" role="tablist" aria-label="Filter publications"></div>
+      <ol class="pub-list" id="publications-list"><li class="pub muted">Loading…</li></ol>
+      <div class="more-row"><button class="btn btn-outline" id="pub-more" type="button" hidden>Show all</button></div>
+    </div>
+  </section>
+
+  <!-- ================= GRANTS (from the Google Sheet) ================= -->
+  <section class="section section-alt" id="grants">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Funding</span>
+        <h2 class="section-title">Research grants</h2>
+        <p class="section-desc">Competitive and institutional funding that powers the lab’s students, hardware, and IoT testbed.</p>
+      </div>
+      <div id="funding-total"></div>
+      <div class="grant-grid" id="grants-list"><p class="muted">Loading…</p></div>
+    </div>
+  </section>
+
+  <!-- ================= JOIN (edit the text directly) ================= -->
+  <section class="section" id="join">
+    <div class="container">
+      <div class="join-card reveal">
+        <div>
+          <span class="eyebrow">Opportunities</span>
+          <h2 class="section-title">We’re looking for people who like to build and measure</h2>
+          <p>The lab welcomes motivated Master’s and PhD students, preferably with a Computer Science background. Curiosity, persistence, and a taste for hands-on systems work matter more than a perfect CV.</p>
+          <div class="join-actions">
+            <a class="btn btn-primary btn-lg" href="https://alakesh-kalita.github.io/" target="_blank" rel="noopener">Get in touch
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            <a class="btn btn-glass btn-lg" href="https://admissions.iitism.ac.in/phd/index.php/admission" target="_blank" rel="noopener">PhD admissions
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+          </div>
+        </div>
+        <ol class="join-steps">
+          <li><span class="step-icon" data-glyph="read"></span><div><h3>Read our work</h3><p>Look through our <a href="#research">research directions</a> and recent <a href="#publications">publications</a> to find where your interests overlap with ours.</p></div></li>
+          <li><span class="step-icon" data-glyph="send"></span><div><h3>Reach out</h3><p>Email Dr. Kalita your CV, a short note on what you’d like to work on, and any relevant projects. Specific is better than generic.</p></div></li>
+          <li><span class="step-icon" data-glyph="apply"></span><div><h3>Apply through IIT (ISM)</h3><p>PhD applicants follow the official admissions process. We’re happy to guide you along the way.</p></div></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-about">
+        <a class="logo" href="#top">
+          <span class="logo-mark">
+            <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M5 11L10.5 23.5L16 15L21.5 23.5L27 11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity=".7"/><path d="M12.8 11.2A4.6 4.6 0 0 1 19.2 11.2M10.3 8.6A8 8 0 0 1 21.7 8.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="5" cy="11" r="2.3" fill="currentColor"/><circle cx="10.5" cy="23.5" r="2.3" fill="currentColor"/><circle cx="16" cy="15" r="3" fill="currentColor"/><circle cx="21.5" cy="23.5" r="2.3" fill="currentColor"/><circle cx="27" cy="11" r="2.3" fill="currentColor"/></svg>
+          </span>
+          <span class="logo-text"><strong>WiNDS Lab</strong><small>Wireless Networks &amp; Distributed Systems</small></span>
+        </a>
+        <p>Department of Mathematics and Computing<br>Indian Institute of Technology (ISM) Dhanbad<br>Dhanbad, Jharkhand 826004, India</p>
+      </div>
+      <div class="footer-links">
+        <h4>Explore</h4>
+        <a href="#research">Research</a>
+        <a href="#devices">Devices</a>
+        <a href="#news">News</a>
+        <a href="#people">People</a>
+        <a href="#publications">Publications</a>
+        <a href="#grants">Grants</a>
+        <a href="#join">Join the lab</a>
+      </div>
+      <div class="footer-links">
+        <h4>Links</h4>
+        <a href="https://alakesh-kalita.github.io/" target="_blank" rel="noopener">Dr. Kalita’s website ↗</a>
+        <a href="https://www.iitism.ac.in/mathematics-and-computing" target="_blank" rel="noopener">Dept. of Mathematics &amp; Computing ↗</a>
+        <a href="https://www.iitism.ac.in/" target="_blank" rel="noopener">IIT (ISM) Dhanbad ↗</a>
+        <a href="https://admissions.iitism.ac.in/phd/index.php/admission" target="_blank" rel="noopener">PhD admissions ↗</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> WiNDS Lab · Dr. Alakesh Kalita</span>
+      <a class="to-top" href="#top">Back to top
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg></a>
+    </div>
+  </div>
+</footer>
+
+<!-- Image viewer for device figures -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer" hidden>
+  <button class="lightbox-close" id="lightbox-close" type="button" aria-label="Close">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+  <figure><img id="lightbox-img" alt=""><figcaption id="lightbox-caption"></figcaption></figure>
+</div>
+
+<script src="assets/config.js"></script>
+<script src="assets/data.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>
