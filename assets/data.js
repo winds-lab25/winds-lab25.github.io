@@ -4,6 +4,7 @@
    You can replace this file with the "Download backup" file from the admin page at any time. */
 window.SITE_DATA = {
   "news": [
+    { "date": "Oct 2026", "tag": "Event", "text": "Co-organized a 3-day workshop on **AI-Enabled Next-Generation UAV Communications** at IIT (ISM) Dhanbad, supported by TiHAN, IIT Hyderabad. [Workshop website](https://uav-workshop.github.io/)" },
     { "date": "Oct 2026", "tag": "Paper", "text": "Three conference papers accepted in **ICDCN 2027**." },
     { "date": "Jun 2026", "tag": "Paper", "text": "Conference paper accepted in **IEEE TENCON 2026**." },
     { "date": "Jun 2026", "tag": "Milestone", "text": "The lab’s **first patent is granted**." },

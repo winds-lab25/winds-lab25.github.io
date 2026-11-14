@@ -77,6 +77,12 @@ each row is one item. Leave the `id` column alone (new rows get an id automatica
 Text formatting in news and research descriptions: `**bold**` and `[link text](https://…)`.
 In publications, the name set in `highlightAuthor` (`A. Kalita`) is bolded automatically.
 
+**Alumni:** when a student graduates, click **Edit** on them and set *Group* to *Alumni · PhD*, *Alumni · M.Tech*,
+*Alumni · M.Sc* or *Alumni · B.Tech*. Alumni appear at the end of People under one **Alumni** heading, with buttons
+to filter by degree, and they are not counted as current student researchers. Use *Research topic* for the thesis
+or project title and *Period* for the years (e.g. `2022–2026`). An *Award / note* that starts with "Now"
+(e.g. `Now at Samsung R&D`) is shown as where they are today.
+
 **Device figures and people photos:** in the *Figure / photo* (or *Photo*) field, click **Upload image…**,
 pick the file, then click **Add** / **Save changes**. Large photos are shrunk automatically and saved in the
 Google Drive folder *WiNDS Lab website images*, shared as "anyone with the link can view".
@@ -107,6 +113,11 @@ missing from the Sheet. It never deletes or changes anything, so it is always sa
 1. Upload everything in this folder to the repository, with `index.html` at the root.
 2. **Settings → Pages →** Source: *Deploy from a branch*, Branch: `main`, Folder: `/ (root)` → **Save**.
 3. After a minute or two the site is live at `https://<user>.github.io/<repo>/`.
+
+**When you change `assets/style.css` or any `.js` file by hand,** also change the version tag in
+`index.html` and `admin.html` (e.g. `style.css?v=20261110` → `style.css?v=20261205`, same for the
+scripts) and upload those too. Browsers keep files for up to 10 minutes; the new tag makes them fetch
+the new version straight away, so visitors never see a mix of old and new files.
 
 After the first upload you only need to re-upload a file when you change it by hand
 (e.g. `index.html` text or `assets/config.js`). Content edits made through the admin page

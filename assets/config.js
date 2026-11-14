@@ -22,7 +22,7 @@ window.SECTIONS = {
     meta: ['date', 'tag'],
     fields: [
       { name: 'date', label: 'Date', placeholder: 'Oct 2026', required: true },
-      { name: 'tag', label: 'Type', type: 'select', options: ['Paper', 'Grant', 'Award', 'Milestone', 'Talk', 'Lab'] },
+      { name: 'tag', label: 'Type', type: 'select', options: ['Paper', 'Grant', 'Award', 'Milestone', 'Talk', 'Event', 'Lab'] },
       { name: 'text', label: 'Text', type: 'textarea', required: true,
         help: 'Use **double asterisks** for bold and [text](https://…) for a link.' },
     ],
@@ -63,10 +63,12 @@ window.SECTIONS = {
     meta: ['group', 'topic'],
     fields: [
       { name: 'name', label: 'Name', required: true },
-      { name: 'group', label: 'Group', type: 'select', options: ['PhD', "Master's", 'Intern', 'Alumni'] },
+      { name: 'group', label: 'Group', type: 'select',
+        options: ['PhD', "Master's", 'Intern', 'Alumni · PhD', 'Alumni · M.Tech', 'Alumni · M.Sc', 'Alumni · B.Tech'] },
       { name: 'topic', label: 'Research topic / programme', placeholder: 'Adaptive cell scheduling in 6TiSCH networks' },
       { name: 'period', label: 'Period', placeholder: 'Since Jul 2025' },
-      { name: 'note', label: 'Award / note', placeholder: 'IndiaAI PhD Fellowship' },
+      { name: 'note', label: 'Award / note', placeholder: 'IndiaAI PhD Fellowship',
+        help: 'For alumni, start with "Now" to show where they are, e.g. Now at Samsung R&D.' },
       { name: 'photo', label: 'Photo', type: 'image', placeholder: 'Upload, or paste an image link',
         help: 'Optional. A square photo works best. Initials show if blank.' },
       { name: 'link', label: 'Profile link', type: 'url', placeholder: 'https://…' },

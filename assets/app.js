@@ -8,7 +8,9 @@
   var PUBS_SHOWN = 6;      // publications shown before "Show all"
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  var PEOPLE_GROUPS = { 'PhD': 'Doctoral researchers', "Master's": 'Master’s researchers', 'Intern': 'Interns', 'Alumni': 'Alumni' };
+  var PEOPLE_GROUPS = { 'PhD': 'Doctoral researchers', "Master's": 'Master’s researchers', 'Intern': 'Interns' };
+  // Alumni ("Alumni · PhD", "Alumni (MSc)", plain "Alumni", …) are shown last, grouped by degree in this order.
+  var ALUMNI_DEGREES = { 'PhD': 'PhD', 'M.Tech': 'M.Tech', 'M.Sc': 'M.Sc', 'B.Tech': 'B.Tech' };
   var PUB_GROUPS = { 'Journal': 'Journals', 'Conference': 'Conferences', 'Patent': 'Patents', 'Book chapter': 'Book chapters' };
   var LINK_NAMES = {
     'ieeexplore.ieee.org': 'IEEE Xplore', 'doi.org': 'DOI', 'dx.doi.org': 'DOI', 'dl.acm.org': 'ACM DL',
@@ -27,6 +29,7 @@
     award: stroke('<circle cx="12" cy="9" r="6"/><path d="m8.5 14-1.5 8 5-3 5 3-1.5-8"/>'),
     external: stroke('<path d="M7 17 17 7M8 7h9v9"/>'),
     arrow: stroke('<path d="M5 12h14M13 6l6 6-6 6"/>'),
+    work: stroke('<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13h18"/>'),
     zoom: stroke('<path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>')
   };
   // Two-tone line icons on a 48-unit grid. Classes: l = line, a = accent line, af = accent fill,
@@ -405,11 +408,11 @@
     } catch (e) { return 'View'; }
   }
 
-  // Groups items by a field, in the order of `known`, then any other values in order of appearance.
+  // Groups items by a field (or a function of the item), in the order of `known`, then any other values in order of appearance.
   function groupBy(items, field, known) {
     var groups = {}, order = Object.keys(known);
     items.forEach(function (it) {
-      var key = it[field] || 'Other';
+      var key = (typeof field === 'function' ? field(it) : it[field]) || 'Other';
       if (!groups[key]) { groups[key] = []; if (order.indexOf(key) < 0) order.push(key); }
       groups[key].push(it);
     });
@@ -455,7 +458,7 @@
            : { icon: 'funds', num: grants.length, label: 'Funded projects' },
       { icon: 'papers', num: pubs.length - patents.length, label: 'Recent publications' },
       { icon: 'patents', num: patents.length, label: 'Patents' + (granted ? ' · ' + granted + ' granted' : '') },
-      { icon: 'people', num: people.filter(function (p) { return !/alum/i.test(p.group); }).length, label: 'Student researchers' }
+      { icon: 'people', num: people.filter(function (p) { return !isAlumni(p); }).length, label: 'Student researchers' }
     ];
     $('stats').innerHTML = stats.map(function (s) {
       var dec = s.dec || 0;
@@ -529,15 +532,27 @@
     }).join('');
   }
 
-  function personCard(p) {
+  function isAlumni(p) { return /alum/i.test(p.group || ''); }
+
+  // "Alumni · M.Tech", "Alumni (MTech)", "PhD alumni" -> "M.Tech" / "PhD"; plain "Alumni" -> ""
+  function alumniDegree(p) {
+    var rest = String(p.group || '').replace(/alum\w*/i, '').replace(/[·:()\-–—]/g, ' ').trim();
+    var known = { phd: 'PhD', mtech: 'M.Tech', msc: 'M.Sc', btech: 'B.Tech' };
+    return known[rest.toLowerCase().replace(/[^a-z]/g, '')] || rest;
+  }
+
+  // `degree` is set for alumni: shown on the card and used by the alumni filter.
+  function personCard(p, degree) {
     var photo = imageUrl(p.photo);
-    return '<article class="person-card">' +
+    var now = /^now\b/i.test(p.note || '');                         // "Now at …" = where an alumnus is today
+    var meta = [degree && degree !== 'Other' ? esc(degree) : '', esc(p.period)].filter(Boolean).join(' · ');
+    return '<article class="person-card"' + (degree ? ' data-degree="' + esc(degree) + '"' : '') + '>' +
       '<div class="avatar" style="--h:' + hue(p.name) + '"><span>' + esc(initials(p.name)) + '</span>' +
       (photo ? '<img src="' + esc(photo) + '" alt="' + esc(p.name) + '" loading="lazy" onerror="this.remove()">' : '') + '</div>' +
       '<h4 class="person-name">' + link(esc(p.name), p.link) + '</h4>' +
       (p.topic ? '<p class="person-topic">' + esc(p.topic) + '</p>' : '') +
-      (p.note ? '<span class="award">' + ICON.award + esc(p.note) + '</span>' : '') +
-      (p.period ? '<div class="person-meta">' + ICON.calendar + esc(p.period) + '</div>' : '') +
+      (p.note ? '<span class="' + (now ? 'now' : 'award') + '">' + (now ? ICON.work : ICON.award) + esc(p.note) + '</span>' : '') +
+      (meta ? '<div class="person-meta">' + ICON.calendar + meta + '</div>' : '') +
       '</article>';
   }
 
@@ -547,15 +562,43 @@
     '<div class="person-meta">How to join ' + ICON.arrow + '</div></a>';
 
   function renderPeople(items) {
-    var groups = groupBy(items, 'group', PEOPLE_GROUPS);
-    var lastCurrent = -1;
-    groups.forEach(function (g, i) { if (g.key !== 'Alumni') lastCurrent = i; });
-    var html = groups.map(function (g, i) {
+    var current = groupBy(items.filter(function (p) { return !isAlumni(p); }), 'group', PEOPLE_GROUPS);
+    var alumni = items.filter(isAlumni);
+    var html = current.map(function (g, i) {
       return '<h3 class="group-title">' + esc(g.title) + '<span class="count">' + g.items.length + '</span></h3>' +
-        '<div class="people-grid">' + g.items.map(personCard).join('') + (i === lastCurrent ? OPEN_CARD : '') + '</div>';
-    }).join('');
-    if (lastCurrent < 0) html = '<div class="people-grid" style="margin-top:28px">' + OPEN_CARD + '</div>' + html;
+        '<div class="people-grid">' + g.items.map(function (p) { return personCard(p); }).join('') +
+        (i === current.length - 1 ? OPEN_CARD : '') + '</div>';
+    }).join('') || '<div class="people-grid" style="margin-top:28px">' + OPEN_CARD + '</div>';
+
+    if (alumni.length) {
+      // One grid, ordered PhD → M.Tech → M.Sc → B.Tech, with degree filter buttons when there is more than one degree.
+      var degrees = groupBy(alumni, alumniDegree, ALUMNI_DEGREES);
+      var tabs = [{ key: 'All', title: 'All', n: alumni.length }].concat(degrees.map(function (d) {
+        return { key: d.title, title: d.title, n: d.items.length };
+      }));
+      html += '<h3 class="group-title">Alumni<span class="count">' + alumni.length + '</span></h3>' +
+        (degrees.length > 1 ? '<div class="people-filters" id="alumni-filters" role="tablist" aria-label="Filter alumni by degree">' +
+          tabs.map(function (t) {
+            return '<button type="button" class="filter" role="tab" aria-selected="false" data-degree="' + esc(t.key) + '">' +
+              esc(t.title) + '<span class="n">' + t.n + '</span></button>';
+          }).join('') + '</div>' : '') +
+        '<div class="people-grid" id="alumni-list">' + degrees.map(function (d) {
+          return d.items.map(function (p) { return personCard(p, d.title); }).join('');
+        }).join('') + '</div>';
+    }
     $('people-list').innerHTML = html;
+    filterAlumni(degrees && degrees.length > 1 && tabs.some(function (t) { return t.key === alumniFilter; }) ? alumniFilter : 'All');
+  }
+
+  var alumniFilter = 'All';
+  function filterAlumni(degree) {
+    alumniFilter = degree;
+    document.querySelectorAll('#alumni-filters .filter').forEach(function (b) {
+      b.setAttribute('aria-selected', String(b.getAttribute('data-degree') === degree));
+    });
+    document.querySelectorAll('#alumni-list .person-card').forEach(function (c) {
+      c.hidden = degree !== 'All' && c.getAttribute('data-degree') !== degree;
+    });
   }
 
   var pubFilter = 'All', pubItems = [];
@@ -705,6 +748,11 @@
     if (!btn) return;
     pubFilter = btn.getAttribute('data-cat');
     renderPublications(pubItems);
+  });
+
+  $('people-list').addEventListener('click', function (e) {
+    var btn = e.target.closest('#alumni-filters .filter');
+    if (btn) filterAlumni(btn.getAttribute('data-degree'));
   });
 
   // image viewer for device figures
