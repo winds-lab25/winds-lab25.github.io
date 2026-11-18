@@ -1,7 +1,7 @@
 # WiNDS Lab website
 
 A simple one-page website for the WiNDS Lab (Wireless Networks & Distributed Systems), IIT (ISM) Dhanbad.
-The **News, Research, Devices, People, Publications and Grants** lists are stored in a **Google Sheet** and managed
+The **News, Research, Software, Devices, People, Publications and Grants** lists are stored in a **Google Sheet** and managed
 from the **admin page** (`admin.html`). A small **Google Apps Script** connects them.
 It's plain HTML, CSS and JavaScript, with no build step.
 
@@ -13,6 +13,7 @@ assets/data.js              Built-in copy of the content (offline fallback + fir
 assets/app.js               Draws the website from the data
 assets/admin.js             Admin page logic
 assets/style.css            All styling (colours at the top)
+assets/img/software/        Screenshots and animations for the Software section
 google-apps-script/Code.gs  The Google Apps Script (paste it into Google, not served by the site)
 ```
 
@@ -52,7 +53,7 @@ scriptUrl: 'https://script.google.com/macros/s/XXXXXXXX/exec',
 ### 5. Sign in once
 Open `admin.html` (double-click it locally, or visit `…/admin.html` on the live site) and sign in.
 The first time, the admin page copies the website's existing content into the Sheet by itself
-(it creates the News, Research, Devices, People, Publications and Grants tabs). Anything you already
+(it creates the News, Research, Software, Devices, People, Publications and Grants tabs). Anything you already
 added is kept.
 
 Done. From now on, use the admin page to make changes.
@@ -66,7 +67,7 @@ doesn't have yet, so connecting a new Sheet never empties the site.
 
 Open **`https://<your-site>/admin.html`** and sign in.
 
-- **Add:** pick a tab, fill the form, click **Add**. News, publications and grants go on top; research, devices and people go at the bottom.
+- **Add:** pick a tab, fill the form, click **Add**. News, publications and grants go on top; research, software, devices and people go at the bottom.
 - **Edit:** click **Edit** on an item, change it, then click **Save changes**.
 - **Delete:** click **Delete** and confirm.
 - **Reorder:** use **↑ ↓**. The website shows items in exactly this order.
@@ -96,8 +97,22 @@ institute account) blocks public links. Either host the Sheet under a personal G
 the images in `assets/img/` in this repo and type the path.
 
 **Devices section:** the four starter entries (IoT sensor nodes, gateway, mobile robots, UAV) are
-placeholders. Edit them with your real devices and photos, or delete them. The section and its menu link hide
-automatically when the Devices tab is empty.
+placeholders. Edit them with your real devices and photos, or delete them. The section and its footer link hide
+automatically when the Devices tab is empty. (Devices is not in the top menu; Software is.)
+
+**Software section (simulators & open-source code):** one entry per simulator, tool or code base, with a
+description, highlights, language, license and a link to the code. A screenshot or animation is shown beside it.
+For an **animated GIF or WebP**, put the file in `assets/img/software/` in this repo and type its path
+(e.g. `assets/img/software/sim11ah-smart-city.webp`). Uploading from the admin page keeps only a still image.
+Animated WebP is usually much smaller than GIF; convert with `gif2webp -lossy -q 60 -m 6 in.gif -o out.webp`.
+Visitors can pause the animation, and those who turn on "reduce motion" see a still frame.
+The section and its menu link hide automatically when the Software tab is empty.
+
+The Software section was added after the first setup, so **the Google Apps Script needs updating once**:
+paste the latest `google-apps-script/Code.gs` into Apps Script and deploy a new version (see *Updating the
+script* below). Then sign in to the admin page: it creates the Software tab by itself, filled with the
+built-in entry, and leaves your other tabs as they are. Until then the website shows the built-in entry from
+`assets/data.js`, and the admin page shows a reminder on the Software tab.
 
 PI photo: put it at `assets/img/people/alakesh.jpg`.
 

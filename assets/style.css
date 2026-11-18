@@ -440,6 +440,59 @@ section[id] { scroll-margin-top: var(--nav-h); }
 .device-body p { flex: 1; margin: 0 0 16px; font-size: .94rem; color: rgba(255, 255, 255, .6); }
 .device .chip { background: rgba(255, 255, 255, .06); border-color: rgba(255, 255, 255, .1); color: rgba(255, 255, 255, .8); }
 
+/* ---------- software: simulators & open-source code ---------- */
+.sw-list { display: grid; gap: 28px; }
+.sw {
+  display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); overflow: hidden;
+  background: #fff; border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow-sm);
+  transition: box-shadow .25s ease;
+}
+.sw:hover { box-shadow: var(--shadow-md); }
+.sw:nth-child(even) .sw-media { order: 2; }          /* alternate sides when there are several */
+.sw.no-media { grid-template-columns: 1fr; }
+/* the screenshot sits in a dark panel that fills the card's height, whatever the image's shape */
+.sw-media {
+  position: relative; display: grid; place-items: center; padding: 28px;
+  background: radial-gradient(circle at 50% 45%, rgba(45, 212, 191, .16), transparent 70%), #0a1628;
+}
+.sw-media::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background-image: radial-gradient(rgba(255, 255, 255, .08) 1px, transparent 1px); background-size: 18px 18px;
+}
+.sw-frame {
+  position: relative; width: 100%; overflow: hidden; border-radius: 10px;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, .12), 0 24px 48px -16px rgba(0, 0, 0, .6);
+}
+.sw-frame img { display: block; width: 100%; height: auto; }
+.sw-frame canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.sw:hover .zoom-ico { opacity: 1; }
+.sw-play {
+  position: absolute; right: 12px; top: 12px; z-index: 1; width: 38px; height: 38px; display: grid; place-items: center;
+  padding: 0; border: 0; border-radius: 10px; background: rgba(10, 22, 40, .72); color: #fff; cursor: pointer;
+}
+.sw-play:hover { background: rgba(10, 22, 40, .92); }
+.sw-play:focus-visible { outline: 2px solid var(--teal-bright); outline-offset: 2px; }
+.sw-play svg { width: 16px; height: 16px; }
+.sw-body { display: flex; flex-direction: column; padding: 36px 36px 34px; }
+.sw-top { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 16px; }
+.sw-cat {
+  padding: 4px 10px; border-radius: 6px; background: var(--teal-50); border: 1px solid var(--teal-100);
+  font-size: .7rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--teal-700);
+}
+.sw-fact { font-size: .85rem; font-weight: 600; color: var(--muted); }
+.sw-fact + .sw-fact::before { content: "·"; margin-right: 10px; }
+.sw-body h3 { margin: 0 0 12px; font-size: 1.6rem; letter-spacing: -.01em; }
+.sw-body p { margin: 0 0 20px; color: var(--body); }
+.sw-body .chips { margin-bottom: 26px; }
+.sw-actions { margin-top: auto; }
+@media (max-width: 900px) {
+  .sw { grid-template-columns: 1fr; }
+  .sw:nth-child(even) .sw-media { order: 0; }
+  .sw-media { padding: 16px; }
+  .sw-body { padding: 26px 24px 28px; }
+  .sw-body h3 { font-size: 1.35rem; }
+}
+
 .lightbox {
   position: fixed; inset: 0; z-index: 200; display: grid; place-items: center; padding: 32px;
   background: rgba(7, 17, 34, .88); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
@@ -691,7 +744,7 @@ section[id] { scroll-margin-top: var(--nav-h); }
   .js .reveal { opacity: 1; transform: none; transition: none; }
   .hero-scene *, .device-art *, .gi * { animation: none !important; transition: none !important; }
   .gi .lit { opacity: 1; }
-  .btn, .feature, .device, .person-card, .grant { transition: none; }
+  .btn, .feature, .device, .sw, .person-card, .grant { transition: none; }
 }
 
 

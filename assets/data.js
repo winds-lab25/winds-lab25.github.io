@@ -30,6 +30,10 @@ window.SITE_DATA = {
     { "title": "Deep RL for Networks", "description": "Applying deep reinforcement learning to scheduling, routing, and control in computer networks.", "keywords": "Deep RL, AI for systems" }
   ],
 
+  "software": [
+    { "name": "sim11ah", "category": "Simulator", "description": "A discrete-event simulator for **IEEE 802.11ah (Wi-Fi HaLow)** networks, built for large-scale IoT research. It models the S1G PHY, the DCF and RAW-based MAC, relay topologies and realistic traffic, and comes with a live GUI dashboard, a CLI batch runner, and animated 3D deployment scenes such as smart cities, farmland, industrial sites and military zones.", "media": "assets/img/software/sim11ah-smart-city.webp", "features": "IEEE 802.11ah, RAW scheduling, Relay topologies, 3D visualizer, GUI + CLI", "language": "Python", "license": "MIT", "link": "https://github.com/alakesh-kalita/sim11ah" }
+  ],
+
   "devices": [
     { "name": "IoT sensor nodes", "category": "IoT node", "description": "Low-power wireless nodes that make up the lab’s IoT testbed for protocol experiments.", "image": "", "specs": "IEEE 802.15.4, 6TiSCH, RPL" },
     { "name": "Gateway / border router", "category": "Gateway", "description": "Connects the low-power testbed to the lab network and edge servers.", "image": "", "specs": "" },

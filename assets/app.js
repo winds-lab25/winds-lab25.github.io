@@ -30,6 +30,9 @@
     external: stroke('<path d="M7 17 17 7M8 7h9v9"/>'),
     arrow: stroke('<path d="M5 12h14M13 6l6 6-6 6"/>'),
     work: stroke('<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13h18"/>'),
+    code: stroke('<path d="m8 6-6 6 6 6M16 6l6 6-6 6"/>'),
+    pause: stroke('<path d="M9 5v14M15 5v14"/>'),
+    play: stroke('<path d="M7 4.5v15l12-7.5z"/>'),
     zoom: stroke('<path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>')
   };
   // Two-tone line icons on a 48-unit grid. Classes: l = line, a = accent line, af = accent fill,
@@ -542,6 +545,54 @@
   }
 
   // `degree` is set for alumni: shown on the card and used by the alumni filter.
+  function renderSoftware(items) {
+    $('software').hidden = !items.length;                          // section appears once an item is added
+    document.querySelectorAll('a[href="#software"]').forEach(function (a) { a.hidden = !items.length; });
+    $('software-list').innerHTML = items.map(function (s) {
+      var img = imageUrl(s.media), feats = list(s.features), href = safeUrl(s.link);
+      var animated = /\.(gif|webp|apng)([?#]|$)/i.test(img);
+      var facts = [s.language, s.license ? s.license + ' license' : ''].filter(Boolean);
+      var host = '';
+      try { host = href ? new URL(href, location.href).hostname.replace(/^www\./, '') : ''; } catch (e) {}
+      var label = host === 'github.com' ? 'View on GitHub' : host === 'gitlab.com' ? 'View on GitLab' : 'View code';
+      return '<article class="sw' + (img ? '' : ' no-media') + '">' +
+        (img ? '<div class="sw-media"><div class="sw-frame">' +
+          '<img src="' + esc(img) + '" alt="' + esc(s.name) + ' in action" loading="lazy">' +
+          '<button class="device-zoom" type="button" data-src="' + esc(img) + '" data-caption="' + esc(s.name) + '" aria-label="View larger image of ' + esc(s.name) + '"><span class="zoom-ico">' + ICON.zoom + '</span></button>' +
+          (animated ? '<button class="sw-play" type="button" aria-label="Pause animation">' + ICON.pause + '</button>' : '') +
+          '</div></div>' : '') +
+        '<div class="sw-body">' +
+          '<div class="sw-top">' + (s.category ? '<span class="sw-cat">' + esc(s.category) + '</span>' : '') +
+            facts.map(function (f) { return '<span class="sw-fact">' + esc(f) + '</span>'; }).join('') + '</div>' +
+          '<h3>' + esc(s.name) + '</h3>' +
+          (s.description ? '<p>' + md(s.description) + '</p>' : '') +
+          (feats.length ? '<div class="chips">' + feats.map(function (k) { return '<span class="chip">' + esc(k) + '</span>'; }).join('') + '</div>' : '') +
+          (href ? '<div class="sw-actions"><a class="btn btn-primary" href="' + esc(href) + '" target="_blank" rel="noopener">' + ICON.code + label + '</a></div>' : '') +
+        '</div></article>';
+    }).join('');
+    // Visitors who prefer reduced motion see a still frame, and can press play.
+    if (reduceMotion) $('software-list').querySelectorAll('.sw-play').forEach(function (b) { setPlaying(b, false); });
+  }
+
+  // Pauses an animated GIF/WebP by drawing its current frame on a canvas laid over it.
+  function setPlaying(btn, play) {
+    var media = btn.closest('.sw-frame'), img = media.querySelector('img'), still = media.querySelector('canvas');
+    if (!play && !still) {
+      if (!img.complete || !img.naturalWidth) {                      // not loaded yet: pause once it is
+        img.addEventListener('load', function () { setPlaying(btn, false); }, { once: true });
+        return;
+      }
+      still = document.createElement('canvas');
+      still.width = img.naturalWidth;
+      still.height = img.naturalHeight;
+      still.getContext('2d').drawImage(img, 0, 0);
+      img.after(still);
+    }
+    if (play && still) still.remove();
+    btn.setAttribute('aria-label', play ? 'Pause animation' : 'Play animation');
+    btn.innerHTML = play ? ICON.pause : ICON.play;
+  }
+
   function personCard(p, degree) {
     var photo = imageUrl(p.photo);
     var now = /^now\b/i.test(p.note || '');                         // "Now at …" = where an alumnus is today
@@ -682,23 +733,24 @@
     }).join('') || empty('Grants will appear here.');
   }
 
-  // What the website shows. Once the Google Sheet is set up it is followed exactly. Until then (a tab is
-  // missing, or the Sheet holds none of the built-in content), the built-in content from assets/data.js is
-  // shown, with anything already added to the Sheet first, so connecting a new Sheet never empties the site.
-  var SECTION_KEYS = ['news', 'research', 'devices', 'people', 'publications', 'grants'];
-  var MAIN_FIELD = { news: 'text', research: 'title', devices: 'name', people: 'name', publications: 'title', grants: 'title' };
+  // What the website shows. Once the Google Sheet is set up it is followed exactly. Until then (the Sheet
+  // holds none of the built-in content), the built-in content from assets/data.js is shown, with anything
+  // already added to the Sheet first, so connecting a new Sheet never empties the site. A section whose tab
+  // isn't in the Sheet yet (e.g. one added to the website later) shows its built-in content on its own.
+  var SECTION_KEYS = ['news', 'research', 'software', 'devices', 'people', 'publications', 'grants'];
+  var MAIN_FIELD = { news: 'text', research: 'title', software: 'name', devices: 'name', people: 'name', publications: 'title', grants: 'title' };
   function itemKey(k, it) { return String((it && it[MAIN_FIELD[k]]) || '').toLowerCase().replace(/[^a-z0-9]+/g, ''); }
 
   function sheetIsSetUp(data, builtIn) {
-    var overlap = 0, total = 0;
-    for (var i = 0; i < SECTION_KEYS.length; i++) {
-      var k = SECTION_KEYS[i];
-      if (!Array.isArray(data[k])) return false;
+    var overlap = 0, total = 0, tabs = 0;
+    SECTION_KEYS.forEach(function (k) {
+      if (!Array.isArray(data[k])) return;
+      tabs++;
       var have = {};
       data[k].forEach(function (it) { have[itemKey(k, it)] = true; });
       (builtIn[k] || []).forEach(function (it) { total++; if (have[itemKey(k, it)]) overlap++; });
-    }
-    return total === 0 || overlap > 0;
+    });
+    return tabs > 0 && (total === 0 || overlap > 0);
   }
 
   function contentFrom(data) {
@@ -706,6 +758,7 @@
     var setUp = data === builtIn || sheetIsSetUp(data, builtIn);
     SECTION_KEYS.forEach(function (k) {
       var live = Array.isArray(data[k]) ? data[k] : [], base = builtIn[k] || [];
+      if (!Array.isArray(data[k])) { out[k] = base; return; }
       if (setUp) { out[k] = live; return; }
       var have = {};
       live.forEach(function (it) { have[itemKey(k, it)] = true; });
@@ -720,6 +773,7 @@
     renderStats(c);
     renderNews(c.news);
     renderResearch(c.research);
+    renderSoftware(c.software);
     renderDevices(c.devices);
     renderPeople(c.people);
     renderPublications(c.publications);
@@ -772,10 +826,14 @@
     document.body.style.overflow = '';
     if (lastFocus) lastFocus.focus();
   }
-  $('devices-list').addEventListener('click', function (e) {
+  function onMediaClick(e) {
+    var play = e.target.closest('.sw-play');
+    if (play) { setPlaying(play, !!play.closest('.sw-frame').querySelector('canvas')); return; }
     var btn = e.target.closest('.device-zoom');
     if (btn) openLightbox(btn.getAttribute('data-src'), btn.getAttribute('data-caption'));
-  });
+  }
+  $('devices-list').addEventListener('click', onMediaClick);
+  $('software-list').addEventListener('click', onMediaClick);
   lightbox.addEventListener('click', function (e) { if (e.target === lightbox || e.target.closest('#lightbox-close')) closeLightbox(); });
 
   // navigation: background on scroll, mobile menu, current-section highlight

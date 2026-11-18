@@ -94,9 +94,11 @@
         $('app').hidden = false;
         $('logout').hidden = false;
         render();
-        // First sign-in on a Sheet that isn't set up yet (a tab is missing, or the Sheet holds none of the
-        // website's existing content): copy that content in automatically. Your own items are kept.
-        if (needsSetup()) restoreBuiltIn(true);
+        // First sign-in on a Sheet that holds none of the website's existing content: copy that content in
+        // automatically (your own items are kept). On a Sheet already in use, only the tabs of sections added
+        // to the website later are created, so items you deleted on purpose never come back.
+        if (isNewSheet()) restoreBuiltIn(true);
+        else if (missingTabs().length) addMissingTabs();
       })
       .catch(function (err) {
         try { sessionStorage.removeItem(PW_KEY); } catch (e) {}
@@ -130,6 +132,7 @@
     renderList();
     var total = Object.keys(SECTIONS).reduce(function (n, k) { return n + ((state.data && state.data[k]) || []).length; }, 0);
     $('empty-note').hidden = total > 0;
+    $('tab-note').hidden = !state.data || total === 0 || missingTabs().indexOf(state.section) < 0;
   }
 
   function renderTabs() {
@@ -338,16 +341,36 @@
   function sameKey(section, item) {
     return String(item[SECTIONS[section].main] || '').toLowerCase().replace(/[^a-z0-9]+/g, '');
   }
-  function needsSetup() {
-    var builtIn = window.SITE_DATA || {}, overlap = 0, total = 0;
-    var missingTab = Object.keys(SECTIONS).some(function (k) { return !Array.isArray(state.data && state.data[k]); });
-    if (missingTab) return true;
+  // Sections whose tab isn't in the Google Sheet yet.
+  function missingTabs() {
+    return Object.keys(SECTIONS).filter(function (k) { return !Array.isArray(state.data && state.data[k]); });
+  }
+
+  // True for a Sheet that holds none of the website's existing content (e.g. a brand-new one).
+  function isNewSheet() {
+    var builtIn = window.SITE_DATA || {}, overlap = 0, total = 0, tabs = 0;
     Object.keys(SECTIONS).forEach(function (k) {
+      if (!Array.isArray(state.data && state.data[k])) return;
+      tabs++;
       var have = {};
       state.data[k].forEach(function (it) { have[sameKey(k, it)] = true; });
       (builtIn[k] || []).forEach(function (it) { total++; if (have[sameKey(k, it)]) overlap++; });
     });
-    return total > 0 && overlap === 0;
+    return !tabs || (total > 0 && overlap === 0);
+  }
+
+  // Creates the tabs of sections added to the website later, filled with their built-in content.
+  // Every other tab is left exactly as it is.
+  function addMissingTabs() {
+    var missing = missingTabs(), data = {};
+    var names = function (keys) { return keys.map(function (k) { return SECTIONS[k].label; }).join(', '); };
+    missing.forEach(function (k) { data[k] = (window.SITE_DATA || {})[k] || []; });
+    return run('import', { data: data }).then(function (ok) {
+      if (!ok) return;
+      var still = missingTabs();
+      if (still.length) toast('Your Google Apps Script is out of date, so ' + names(still) + ' can’t be saved yet. See the note on that tab.', true);
+      else toast('Added the new ' + names(missing) + ' tab to your Google Sheet.');
+    });
   }
 
   function restoreBuiltIn(auto) {

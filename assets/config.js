@@ -40,6 +40,25 @@ window.SECTIONS = {
     ],
   },
 
+  software: {
+    label: 'Software',
+    addTo: 'bottom',
+    main: 'name',
+    meta: ['category', 'language'],
+    fields: [
+      { name: 'name', label: 'Name', placeholder: 'sim11ah', required: true },
+      { name: 'category', label: 'Type', type: 'select', options: ['Simulator', 'Testbed / firmware', 'Tool / library', 'Dataset', 'Other'] },
+      { name: 'description', label: 'Description', type: 'textarea', placeholder: 'What it does and what it is for.',
+        help: 'Use **double asterisks** for bold and [text](https://…) for a link.' },
+      { name: 'media', label: 'Screenshot / animation', type: 'image', placeholder: 'assets/img/software/my-simulator.webp',
+        help: 'Optional; 16:9 looks best. For an animated GIF or WebP, put the file in assets/img/software/ in the repo and type its path here. Uploading keeps only a still image.' },
+      { name: 'features', label: 'Highlights', placeholder: 'IEEE 802.11ah, RAW scheduling, 3D visualizer', help: 'Separate with commas.' },
+      { name: 'language', label: 'Language', placeholder: 'Python' },
+      { name: 'license', label: 'License', placeholder: 'MIT' },
+      { name: 'link', label: 'Code link', type: 'url', placeholder: 'https://github.com/…' },
+    ],
+  },
+
   devices: {
     label: 'Devices',
     addTo: 'bottom',

@@ -6,7 +6,7 @@
  *   GET  <web app URL>   -> public: returns all site content as JSON
  *   POST <web app URL>   -> admin:  add / update / delete / move / import / upload (needs the password)
  *
- * Each tab (News, Research, Devices, People, Publications, Grants) is one section of the site.
+ * Each tab (News, Research, Software, Devices, People, Publications, Grants) is one section of the site.
  * Images uploaded from the admin page are saved in the Drive folder "WiNDS Lab website images".
  *
  * Setup (once) — full steps are in README.md:
@@ -27,6 +27,7 @@
 var SECTIONS = {
   news:         ['date', 'tag', 'text'],
   research:     ['title', 'description', 'keywords'],
+  software:     ['name', 'category', 'description', 'media', 'features', 'language', 'license', 'link'],
   devices:      ['name', 'category', 'description', 'image', 'specs'],
   people:       ['name', 'group', 'topic', 'period', 'note', 'photo', 'link'],
   publications: ['category', 'authors', 'title', 'venue', 'details', 'link'],
